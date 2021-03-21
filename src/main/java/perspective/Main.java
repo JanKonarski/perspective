@@ -19,7 +19,7 @@ public class Main {
     
     public static void main(String[] args) {
         //TODO: rozwiązać problem static
-        getConfiguration();
+        //getConfiguration();
     }
     
     private void getConfiguration() {
