@@ -41,13 +41,19 @@ public class Window extends JFrame implements KeyListener, ActionListener {
         
         JMenu file = new JMenu("File");
         file.setMnemonic(KeyEvent.VK_F);
-        
         menuBar.add(file);
         
         JMenuItem inFile = new JMenuItem("Load file");
-        inFile.setBackground(backgroundColor);
         inFile.setMnemonic(KeyEvent.VK_L);
         file.add(inFile);
+        
+        JMenu help = new JMenu("Help");
+        help.setMnemonic(KeyEvent.VK_H);
+        menuBar.add(help);
+        
+        JMenuItem about = new JMenuItem("About");
+        about.setMnemonic(KeyEvent.VK_A);
+        help.add(about);
     }
     
     @Override
