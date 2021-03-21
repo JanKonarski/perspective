@@ -5,10 +5,10 @@ package perspective;
  * @author Jan Konarski
  */
 public class Configuration {
-    public int imageWidth = 720;
-    public int imageHeight = 480;
-    public int windowWidth = 720;
-    public int windowHeight = 480;
+    public int imageWidth = 1280;
+    public int imageHeight = 800;
+    public int windowWidth = 1280;
+    public int windowHeight = 800;
     //TODO: image background color
     //TODO: image line color
     
