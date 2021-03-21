@@ -2,15 +2,17 @@ package perspective;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.JPanel;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Jan Konarski
  */
 //TODO: przytrzymanie przycisku powtarza czynność
-public class Window extends JPanel implements KeyListener {
+public class Window extends JFrame implements KeyListener {
     public Window(Configuration config) {
+        //Set close window on exit button
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         //Window size
         setSize(
             config.windowWidth,

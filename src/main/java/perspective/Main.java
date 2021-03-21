@@ -14,17 +14,19 @@ import javax.swing.JOptionPane;
  * @author Jan Konasrki
  */
 public class Main {
-    private String propFilename = "config.properties";
-    private Configuration config = new Configuration();
-    
     public static void main(String[] args) {
-        //TODO: rozwiązać problem static
-        //getConfiguration();
+        String propFileName = "config.properties";
+        Configuration config = new Configuration();
+        
+        //Get or set configuration
+        getConfiguration(propFileName, config);
+        
+        new Window(config);
     }
     
-    private void getConfiguration() {
+    private static void getConfiguration(String propFileName, Configuration config) {
         try {
-            InputStream inStream = new FileInputStream(propFilename);
+            InputStream inStream = new FileInputStream(propFileName);
             Properties prop = new Properties();
             prop.load(inStream);
             
@@ -35,7 +37,7 @@ public class Main {
             config.windowHeight = config.parse(prop.getProperty("windowHeight"));
         } catch(IOException e) {
             //If occure problem with saving file
-            createProperties();
+            createProperties(propFileName, config);
         } catch(IllegalArgumentException e) {
             //If occure unexpected value in configuration file
             JOptionPane.showMessageDialog(
@@ -47,9 +49,9 @@ public class Main {
         }
     }
     
-    private void createProperties() {
+    private static void createProperties(String propFileName, Configuration config) {
         try {
-            OutputStream outStream = new FileOutputStream(propFilename);
+            OutputStream outStream = new FileOutputStream(propFileName);
             Properties prop = new Properties();
             
             //Set default configuration values
