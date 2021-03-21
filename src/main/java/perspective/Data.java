@@ -18,7 +18,7 @@ import perspective.geometry.Point;
  */
 public class Data {
     private String jsonText;
-    private List<Line> world;
+    private List<Line> world = null;
     
     public List<Line> read(String filePath) throws IOException, JSONException {
         world = new ArrayList<>();
