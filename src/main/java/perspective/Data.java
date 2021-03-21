@@ -17,14 +17,11 @@ import perspective.geometry.Point;
  * @author Jan Konarski
  */
 public class Data {
-    private String jsonText;
-    private List<Line> world = null;
-    
     public List<Line> read(String filePath) throws IOException, JSONException {
-        world = new ArrayList<>();
+        List<Line> world = new ArrayList<>();
         
         Path path = Path.of(filePath);
-        jsonText = Files.readString(path, StandardCharsets.UTF_8);
+        final String jsonText = Files.readString(path, StandardCharsets.UTF_8);
         
         //Create json parser
         JSONObject json = new JSONObject(jsonText);
