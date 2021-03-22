@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.JPanel;
 import perspective.Configuration;
@@ -15,10 +14,10 @@ import perspective.Configuration;
  */
 public class Camera extends JPanel {
     public final double SHIFT = 0.25;
-    public final double TURN = 0.1;
+    public final double TURN = 1.0;
     
-    private int cameraDieWidth = 7; //6.75
-    private int cameraDieHeight = 12;
+    private final int cameraDieWidth = 7; //6.75
+    private final int cameraDieHeight = 12;
     private final double focalLength;
     
     //World position
@@ -76,7 +75,6 @@ public class Camera extends JPanel {
         
     }
     
-    //TODO ten override nie daje koloru tła
     @Override
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
@@ -84,21 +82,14 @@ public class Camera extends JPanel {
         Graphics2D graphics2D = (Graphics2D)graphics;
         
         if(world != null) {
-            boolean[] visible = new boolean[world.size()];
-            for(int i=0; i<visible.length; i++)
-                visible[i]  = true;
-
-            //TODO zmienić nieeleganckie rozwiązanie
-            for(int i = 0; i<world.size(); i++)
-                if(world.get(i).point1().get()[2]+zPosition < 0 || world.get(i).point2().get()[2]+zPosition < 0)
-                    visible[i] = false;
-
-            for(int i=0; i<world.size(); i++)
-                if(visible[i]) {
-                    double x1 = ((world.get(i).point1().get()[0]+xPosition)*focalLength)/(world.get(i).point1().get()[2]+focalLength+zPosition);
-                    double y1 = ((world.get(i).point1().get()[1]+yPosition)*focalLength)/(world.get(i).point1().get()[2]+focalLength+zPosition);
-                    double x2 = ((world.get(i).point2().get()[0]+xPosition)*focalLength)/(world.get(i).point2().get()[2]+focalLength+zPosition);
-                    double y2 = ((world.get(i).point2().get()[1]+yPosition)*focalLength)/(world.get(i).point2().get()[2]+focalLength+zPosition);
+            for(int i=0; i<world.size(); i++) {
+                Line newLine = transform(world.get(i));
+                
+                if(newLine.point1().get()[2] > 0 || newLine.point2().get()[2] > 0) {
+                    double x1 = (newLine.point1().get()[0]*focalLength)/(newLine.point1().get()[2]+focalLength);
+                    double y1 = (newLine.point1().get()[1]*focalLength)/(newLine.point1().get()[2]+focalLength);
+                    double x2 = (newLine.point2().get()[0]*focalLength)/(newLine.point2().get()[2]+focalLength);
+                    double y2 = (newLine.point2().get()[1]*focalLength)/(newLine.point2().get()[2]+focalLength);
                     
                     int scaleX = getSize().width / cameraDieWidth;
                     int scaleY = getSize().height / cameraDieHeight;
@@ -114,10 +105,46 @@ public class Camera extends JPanel {
                     graphics2D.setStroke(new BasicStroke(1));
                     graphics2D.setColor(new Color(204, 204, 204));
                     graphics2D.drawLine(px1, py1, px2, py2);
-                    
-                    //System.out.println(String.format("%f %f - %f %f", x1, y1, x2, y2));
                 }
-            //System.out.println(String.format("%dx%d", getSize().width, getSize().height));
+            }
         }
+    }
+    
+    private Line transform(Line line) {
+        //Get co-ordinates of ferst 3D point
+        double newX1 = line.point1().X() + xPosition;
+        double newY1 = line.point1().Y() + yPosition;
+        double newZ1 = line.point1().Z() + zPosition;
+        
+        //get co-ordinates of second 3D point
+        double newX2 = line.point2().X() + xPosition;
+        double newY2 = line.point2().Y() + yPosition;
+        double newZ2 = line.point2().Z() + zPosition;
+        
+        //X rotation
+        double xRadians = (xRotation * Math.PI) / 180;
+        newY1 = newY1*Math.cos(xRadians) - newZ1*Math.sin(xRadians);
+        newZ1 = newY1*Math.sin(xRadians) + newZ1*Math.cos(xRadians);
+        newY2 = newY2*Math.cos(xRadians) - newZ2*Math.sin(xRadians);
+        newZ2 = newY2*Math.sin(xRadians) + newZ2*Math.cos(xRadians);
+        
+        //Y rotation
+        double yRadians = (yRotation * Math.PI) / 180;
+        newX1 = newZ1*Math.sin(yRadians) + newX1*Math.cos(yRadians);
+        newZ1 = newZ1*Math.cos(yRadians) - newX1*Math.sin(yRadians);
+        newX2 = newZ2*Math.sin(yRadians) + newX2*Math.cos(yRadians);
+        newZ2 = newZ2*Math.cos(yRadians) - newX2*Math.sin(yRadians);
+        
+        //Z rotation
+        double zRadians = (zRotation * Math.PI) / 180;
+        newX1 = newX1*Math.cos(zRadians) - newY1*Math.sin(zRadians);
+        newY1 = newX1*Math.sin(zRadians) + newY1*Math.cos(zRadians);
+        newX2 = newX2*Math.cos(zRadians) - newY2*Math.sin(zRadians);
+        newY2 = newX2*Math.sin(zRadians) + newY2*Math.cos(zRadians);
+        
+        return new Line(
+            new Point(newX1, newY1, newZ1),
+            new Point(newX2, newY2, newZ2)
+        );
     }
 }

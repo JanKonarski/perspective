@@ -111,7 +111,7 @@ public class Window extends JFrame implements KeyListener, ActionListener {
             view.moveY(+view.SHIFT);
         }
         //Down move
-        if(e.getKeyCode() == KeyEvent.VK_SHIFT) {
+        if(e.getKeyCode() == KeyEvent.VK_Z) {
             view.moveY(-view.SHIFT);
         }
         //Forward rotation
