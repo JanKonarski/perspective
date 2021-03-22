@@ -109,7 +109,7 @@ public class Camera extends JPanel {
                     int px1 = (int)Math.ceil(x1 * scaleX + centerX);
                     int py1 = (int)Math.ceil(y1 * scaleY + centerY);
                     int px2 = (int)Math.ceil(x2 * scaleX + centerX);
-                    int py2 = (int)Math.ceil(y1 * scaleY + centerY);
+                    int py2 = (int)Math.ceil(y2 * scaleY + centerY);
                     
                     graphics2D.setStroke(new BasicStroke(2));
                     graphics2D.setColor(new Color(204, 204, 204));
