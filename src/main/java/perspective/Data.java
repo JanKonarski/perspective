@@ -37,16 +37,16 @@ public class Data {
                 
                 //Create first line point
                 Point point1 = new Point(
-                    lineObject.getFloat("x1"),
-                    lineObject.getFloat("y1"),
-                    lineObject.getFloat("z1")
+                    lineObject.getDouble("x1"),
+                    lineObject.getDouble("y1"),
+                    lineObject.getDouble("z1")
                 );
                 
                 //Create second line point
                 Point point2 = new Point(
-                    lineObject.getFloat("x2"),
-                    lineObject.getFloat("y2"),
-                    lineObject.getFloat("z2")
+                    lineObject.getDouble("x2"),
+                    lineObject.getDouble("y2"),
+                    lineObject.getDouble("z2")
                 );
                 
                 //Add line to world

@@ -5,10 +5,9 @@ package perspective;
  * @author Jan Konarski
  */
 public class Configuration {
-    public int imageWidth = 1280;
-    public int imageHeight = 800;
     public int windowWidth = 1280;
     public int windowHeight = 800;
+    public int cameraFocalLength = 50;
     //TODO: image background color
     //TODO: image line color
     

@@ -1,5 +1,6 @@
 package perspective;
 
+import java.awt.EventQueue;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -21,7 +22,12 @@ public class Main {
         //Get or set configuration
         getConfiguration(propFileName, config);
         
-        new Window(config);
+        EventQueue.invokeLater(new Runnable(){
+            @Override
+            public void run() {
+                new Window(config);
+            }
+        });
     }
     
     private static void getConfiguration(String propFileName, Configuration config) {
@@ -31,10 +37,9 @@ public class Main {
             prop.load(inStream);
             
             //Load configurate parameters from file
-            config.imageWidth = config.parse(prop.getProperty("imageWidth"));
-            config.imageHeight = config.parse(prop.getProperty("imageHeight"));
             config.windowWidth = config.parse(prop.getProperty("windowWidth"));
             config.windowHeight = config.parse(prop.getProperty("windowHeight"));
+            config.cameraFocalLength = config.parse(prop.getProperty("cameraFocalLength"));
         } catch(IOException e) {
             //If occure problem with saving file
             createProperties(propFileName, config);
@@ -46,6 +51,7 @@ public class Main {
                 "Value error",
                 JOptionPane.ERROR_MESSAGE
             );
+            System.exit(0);
         }
     }
     
@@ -55,10 +61,9 @@ public class Main {
             Properties prop = new Properties();
             
             //Set default configuration values
-            prop.setProperty("imageWidth", String.valueOf(config.imageHeight));
-            prop.setProperty("imageHeight", String.valueOf(config.imageHeight));
             prop.setProperty("windowWidth", String.valueOf(config.windowWidth));
             prop.setProperty("windowHeight", String.valueOf(config.windowHeight));
+            prop.setProperty("cameraFocalLength", String.valueOf(config.cameraFocalLength));
             
             //Save into file
             prop.store(outStream, "Perspective program configuration");
@@ -70,6 +75,7 @@ public class Main {
                 "Configuration save error",
                 JOptionPane.ERROR_MESSAGE
             );
+            System.exit(0);
         }
     }
 }

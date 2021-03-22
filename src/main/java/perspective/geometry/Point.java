@@ -5,23 +5,23 @@ package perspective.geometry;
  * @author Jan Konarski
  */
 public class Point {
-    private float x;
-    private float y;
-    private float z;
+    private double x;
+    private double y;
+    private double z;
     
-    public Point(float x, float y, float z) {
+    public Point(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
     
-    public void set(float x, float y, float z) {
+    public void set(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
     
-    public void set(float[] values) {
+    public void set(double[] values) {
         if(values.length != 3)
             throw new RuntimeException("Invalid input vector");
         
@@ -30,31 +30,31 @@ public class Point {
         z = values[2];
     }
     
-    public float[] get() {
-        return new float[] {x, y, z};
+    public double[] get() {
+        return new double[] {x, y, z};
     }
     
-    public void X(float value) {
+    public void X(double value) {
         x = value;
     }
     
-    public float X() {
+    public double X() {
         return x;
     }
     
-    public void Y(float value) {
+    public void Y(double value) {
         y = value;
     }
     
-    public float Y() {
+    public double Y() {
         return y;
     }
     
-    public void Z(float value) {
+    public void Z(double value) {
         z = value;
     }
     
-    public float Z() {
+    public double Z() {
         return z;
     }
 }
