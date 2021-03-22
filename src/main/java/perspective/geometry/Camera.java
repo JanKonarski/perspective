@@ -90,7 +90,7 @@ public class Camera extends JPanel {
 
             //TODO zmienić nieeleganckie rozwiązanie
             for(int i = 0; i<world.size(); i++)
-                if(world.get(i).point1().get()[2] < 0 || world.get(i).point2().get()[2] < 0)
+                if(world.get(i).point1().get()[2]+zPosition < 0 || world.get(i).point2().get()[2]+zPosition < 0)
                     visible[i] = false;
 
             for(int i=0; i<world.size(); i++)
@@ -111,7 +111,7 @@ public class Camera extends JPanel {
                     int px2 = (int)Math.ceil(x2 * scaleX + centerX);
                     int py2 = (int)Math.ceil(y2 * scaleY + centerY);
                     
-                    graphics2D.setStroke(new BasicStroke(2));
+                    graphics2D.setStroke(new BasicStroke(1));
                     graphics2D.setColor(new Color(204, 204, 204));
                     graphics2D.drawLine(px1, py1, px2, py2);
                     

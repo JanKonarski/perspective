@@ -139,7 +139,7 @@ public class Window extends JFrame implements KeyListener, ActionListener {
             view.rotateZ(-view.TURN);
         }
         
-        showView();
+        view.repaint();
     }
     
     @Override
@@ -154,7 +154,7 @@ public class Window extends JFrame implements KeyListener, ActionListener {
                     File file = chooser.getSelectedFile();
                     List<Line> world = new Data().read(file.getPath());
                     view.setNewWorld(world);
-                    showView();
+                    view.repaint();
                 } catch(IOException | JSONException ex) {
                     //
                     JOptionPane.showMessageDialog(
@@ -175,11 +175,6 @@ public class Window extends JFrame implements KeyListener, ActionListener {
                 JOptionPane.INFORMATION_MESSAGE
             );
         }
-    }
-    
-    //TODO
-    private void showView() {
-        view.repaint();
     }
     
     @Override
