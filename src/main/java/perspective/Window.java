@@ -138,6 +138,14 @@ public class Window extends JFrame implements KeyListener, ActionListener {
         if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
             view.rotateZ(-view.TURN);
         }
+        //ZOOM +
+        if(e.getKeyCode() == KeyEvent.VK_T) {
+            view.focalLength(+view.ZOOM);
+        }
+        //ZOOM -
+        if(e.getKeyCode() == KeyEvent.VK_G) {
+            view.focalLength(-view.ZOOM);
+        }
         
         view.repaint();
     }

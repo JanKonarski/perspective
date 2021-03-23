@@ -15,10 +15,11 @@ import perspective.Configuration;
 public class Camera extends JPanel {
     public final double SHIFT = 0.25;
     public final double TURN = 1.0;
+    public final double ZOOM = 1.0;
     
-    private final int cameraDieWidth = 7; //6.75
+    private final int cameraDieWidth = 12; //6.75
     private final int cameraDieHeight = 12;
-    private final double focalLength;
+    private double focalLength;
     
     //World position
     private double xPosition = 0.0;
@@ -57,6 +58,10 @@ public class Camera extends JPanel {
     
     public void rotateZ(double value) {
         zRotation += value;
+    }
+    
+    public void focalLength(double value) {
+        focalLength += value;
     }
     
     public void setNewWorld(List<Line> world) {
