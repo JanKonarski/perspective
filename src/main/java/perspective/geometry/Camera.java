@@ -87,9 +87,9 @@ public class Camera extends JPanel {
                 
                 if(newLine.point1().get()[2] > 0 || newLine.point2().get()[2] > 0) {
                     double x1 = (newLine.point1().get()[0]*focalLength)/(newLine.point1().get()[2]+focalLength);
-                    double y1 = (newLine.point1().get()[1]*focalLength)/(newLine.point1().get()[2]+focalLength);
+                    double y1 = -(newLine.point1().get()[1]*focalLength)/(newLine.point1().get()[2]+focalLength);
                     double x2 = (newLine.point2().get()[0]*focalLength)/(newLine.point2().get()[2]+focalLength);
-                    double y2 = (newLine.point2().get()[1]*focalLength)/(newLine.point2().get()[2]+focalLength);
+                    double y2 = -(newLine.point2().get()[1]*focalLength)/(newLine.point2().get()[2]+focalLength);
                     
                     int scaleX = getSize().width / cameraDieWidth;
                     int scaleY = getSize().height / cameraDieHeight;

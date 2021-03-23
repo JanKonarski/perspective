@@ -108,11 +108,11 @@ public class Window extends JFrame implements KeyListener, ActionListener {
         }
         //Up move
         if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-            view.moveY(+view.SHIFT);
+            view.moveY(-view.SHIFT);
         }
         //Down move
         if(e.getKeyCode() == KeyEvent.VK_Z) {
-            view.moveY(-view.SHIFT);
+            view.moveY(+view.SHIFT);
         }
         //Forward rotation
         if(e.getKeyCode() == KeyEvent.VK_UP) {
